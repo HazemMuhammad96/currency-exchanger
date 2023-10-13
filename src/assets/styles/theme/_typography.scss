@@ -1,0 +1,96 @@
+@use "screens" as *;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+$type-scale: (
+  display1: (
+    sm: 48px,
+    md: 56px,
+    lg: 56px,
+    font-weight: 500,
+    font-family: 'Montserrat',
+  ),
+  display2: (
+    sm: 40px,
+    md: 48px,
+    lg: 48px,
+    font-weight: 500,
+    font-family: 'Montserrat',
+  ),
+  headline1: (
+    sm: 32px,
+    md: 40px,
+    lg: 40px,
+    font-weight: 500,
+    font-family: 'Montserrat',
+  ),
+  headline2: (
+    sm: 24px,
+    md: 32px,
+    lg: 32px,
+    font-weight: 500,
+    font-family: 'Montserrat',
+  ),
+  title1: (
+    sm: 18px,
+    md: 22px,
+    lg: 22px,
+    font-weight: 500,
+    font-family: 'Inter',
+  ),
+  title2: (
+    sm: 16px,
+    md: 18px,
+    lg: 18px,
+    font-weight: 600,
+    font-family: 'Inter',
+  ),
+  paragraph: (
+    sm: 14px,
+    md: 16px,
+    lg: 16px,
+    font-weight: 400,
+    font-family: 'Inter',
+  ),
+  label1: (
+    sm: 12px,
+    md: 14px,
+    lg: 14px,
+    font-weight: 500,
+    font-family: 'Inter',
+  ),
+  label2: (
+    sm: 12px,
+    md: 14px,
+    lg: 14px,
+    font-weight: 400,
+    font-family: 'Inter',
+  ),
+);
+
+:root {
+  font-family: 'Inter', sans-serif;
+}
+
+@mixin text($type-name: "paragraph") {
+  $type-properties: map-get($type-scale, $type-name);
+  font-weight: map-get($type-properties, font-weight);
+  font-size: map-get($type-properties, sm);
+  line-height: map-get($type-properties, line-height);
+  font-family: map-get($type-properties, font-family), sans-serif;
+
+  @include screen-md {
+    font-size: map-get($type-properties, md);
+  }
+
+  @include screen-lg {
+    font-size: map-get($type-properties, lg);
+  }
+}
+
+@each $type-name, $type-properties in $type-scale {
+  .text-#{$type-name} {
+    @include text($type-name);
+  }
+}
+
+

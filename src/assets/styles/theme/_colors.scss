@@ -1,0 +1,86 @@
+$colors: (
+  "primary": (
+    "container": "#a1c4fc",
+    "content": "#173259",
+  ),
+  "primary-container": (
+    "container": "#3f4564",
+    "content": "#d8defd",
+  ),
+  "secondary": (
+    "container": "#dbbce1",
+    "content": "#3e2645",
+  ),
+  "secondary-container": (
+    "container": "#563c5d",
+    "content": "#f8d6fe",
+  ),
+  "background": (
+    "container": "#141a23",
+    "content": "#dce0ec",
+  ),
+  "surface": (
+    "container": "#1e2633",
+    "content": "#dce0ec",
+  ),
+  "outline": (
+    "container": "#353a41",
+    "content": "#d8defd",
+  ),
+  "success": (
+    "container": "#89dc92",
+    "content": "#023a15",
+  ),
+  "success-container": (
+    "container": "#055422",
+    "content": "#a4f9ac",
+  ),
+  "warning": (
+    "container": "#f1c24b",
+    "content": "#3e2e03",
+  ),
+  "warning-container": (
+    "container": "#5a4406",
+    "content": "#fbe1a4",
+  ),
+  "danger": (
+    "container": "#fbb5ac",
+    "content": "#66020a",
+  ),
+  "danger-container": (
+    "container": "#93000a",
+    "content": "#ffdad6",
+  ),
+);
+
+$color-prefixes: (
+  "container": "",
+  "content": "-on",
+);
+
+:root {
+  @each $color-name, $color-contexts in $colors {
+    @each $context-name, $context-value in $color-contexts {
+      --color#{map-get($color-prefixes, $context-name)}-#{$color-name}: #{$context-value};
+    }
+  }
+}
+
+@each $color-name, $color-contexts in $colors {
+
+  .card-#{$color-name} {
+    background: var(--color-#{$color-name});
+    color: var(--color-on-#{$color-name});
+  }
+
+  .text-#{$color-name} {
+    color: var(--color-#{$color-name});
+  }
+
+}
+
+
+@mixin card($color-name) {
+  background: var(--color-#{$color-name});
+  color: var(--color-on-#{$color-name});
+}
