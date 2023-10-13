@@ -1,136 +1,143 @@
-@mixin row($main-axis: "center", $cross-axis: "flex-start") {
-  display: flex;
-  flex-direction: row;
-  justify-content: $main-axis;
-  align-items: $cross-axis;
+@mixin row($main-axis: flex-start, $cross-axis: center) {
+    display: flex;
+    flex-direction: row;
+    justify-content: $main-axis;
+    align-items: $cross-axis;
 }
 
-@mixin row-reverse($main-axis: "center", $cross-axis: "flex-start") {
-  @include row($main-axis, $cross-axis);
-  flex-direction: row-reverse;
+@mixin row-reverse($main-axis: flex-start, $cross-axis: center) {
+    @include row($main-axis, $cross-axis);
+    flex-direction: row-reverse;
 }
 
-@mixin column($main-axis: "flex-start", $cross-axis: "flex-start") {
-  display: flex;
-  flex-direction: column;
-  justify-content: $main-axis;
-  align-items: $cross-axis;
+@mixin column($main-axis: flex-start, $cross-axis: flex-start) {
+    display: flex;
+    flex-direction: column;
+    justify-content: $main-axis;
+    align-items: $cross-axis;
 }
 
 @mixin centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @mixin grid($columns: 2) {
-  display: grid;
-  grid-template-columns: repeat($columns, 1fr);
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
 }
 
 @mixin square($size: unset) {
-  width: $size;
-  height: $size;
-  aspect-ratio: 1/1;
+    width: $size;
+    height: $size;
+    aspect-ratio: 1/1;
+}
+
+@mixin user-select($value: none) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    //pointer-events: none;
 }
 
 .row {
-  @include row();
+    @include row();
 }
 
 .row-between {
-  @include row("space-between");
+    @include row(space-between);
 }
 
 .column {
-  @include column();
+    @include column();
 }
 
 .column-center {
-  @include column("center");
+    @include column(center);
 }
 
 .column-stretch {
-  @include column("stretch");
+    @include column(stretch);
 }
 
 .centered {
-  @include centered();
+    @include centered();
 }
 
 @for $i from 1 through 12 {
-  .grid-cols-#{$i} {
-    @include grid($i);
-  }
+    .grid-cols-#{$i} {
+        @include grid($i);
+    }
 
-  .gap-#{$i} {
-    gap: #{$i * 4}px;
-  }
+    .gap-#{$i} {
+        gap: #{$i * 4}px;
+    }
 
-  .gap-x-#{$i} {
-    column-gap: #{$i * 4}px;
-  }
+    .gap-x-#{$i} {
+        column-gap: #{$i * 4}px;
+    }
 
-  .gap-y-#{$i} {
-    row-gap: #{$i * 4}px;
-  }
+    .gap-y-#{$i} {
+        row-gap: #{$i * 4}px;
+    }
 
-  .p-#{$i} {
-    padding: #{$i * 4}px;
-  }
+    .p-#{$i} {
+        padding: #{$i * 4}px;
+    }
 
-  .px-#{$i} {
-    padding-inline: #{$i * 4}px;
-  }
+    .px-#{$i} {
+        padding-inline: #{$i * 4}px;
+    }
 
-  .py-#{$i} {
-    padding-top: #{$i * 4}px;
-    padding-bottom: #{$i * 4}px;
-  }
+    .py-#{$i} {
+        padding-top: #{$i * 4}px;
+        padding-bottom: #{$i * 4}px;
+    }
 
-  .pt-#{$i} {
-    padding-top: #{$i * 4}px;
-  }
+    .pt-#{$i} {
+        padding-top: #{$i * 4}px;
+    }
 
-  .pb-#{$i} {
-    padding-bottom: #{$i * 4}px;
-  }
+    .pb-#{$i} {
+        padding-bottom: #{$i * 4}px;
+    }
 
-  .ps-#{$i} {
-    padding-inline-start: #{$i * 4}px;
-  }
+    .ps-#{$i} {
+        padding-inline-start: #{$i * 4}px;
+    }
 
-  .pe-#{$i} {
-    padding-inline-end: #{$i * 4}px;
-  }
+    .pe-#{$i} {
+        padding-inline-end: #{$i * 4}px;
+    }
 
-  .m-#{$i} {
-    margin: #{$i * 4}px;
-  }
+    .m-#{$i} {
+        margin: #{$i * 4}px;
+    }
 
-  .mx-#{$i} {
-    margin-inline: #{$i * 4}px;
-  }
+    .mx-#{$i} {
+        margin-inline: #{$i * 4}px;
+    }
 
-  .my-#{$i} {
-    margin-top: #{$i * 4}px;
-    margin-bottom: #{$i * 4}px;
-  }
+    .my-#{$i} {
+        margin-top: #{$i * 4}px;
+        margin-bottom: #{$i * 4}px;
+    }
 
-  .mt-#{$i} {
-    margin-top: #{$i * 4}px;
-  }
+    .mt-#{$i} {
+        margin-top: #{$i * 4}px;
+    }
 
-  .mb-#{$i} {
-    margin-bottom: #{$i * 4}px;
-  }
+    .mb-#{$i} {
+        margin-bottom: #{$i * 4}px;
+    }
 
-  .ms-#{$i} {
-    margin-inline-end: #{$i * 4}px;
-  }
+    .ms-#{$i} {
+        margin-inline-end: #{$i * 4}px;
+    }
 
-  .me-#{$i} {
-    margin-inline-start: #{$i * 4}px;
-  }
-
+    .me-#{$i} {
+        margin-inline-start: #{$i * 4}px;
+    }
 }

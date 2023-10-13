@@ -1,4 +1,12 @@
 @use "theme" as *;
 @use "utils" as *;
 
+.material-symbols-outlined {
+    @include centered;
+    font-variation-settings:
+        "FILL" 0,
+        "wght" 100,
+        "GRAD" 200,
+        "opsz" 24;
+}
 

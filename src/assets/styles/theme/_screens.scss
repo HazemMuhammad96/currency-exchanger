@@ -1,33 +1,23 @@
 $screens: (
-  'md': 600px,
-  'lg': 900px,
-  'xl': 1280px,
+    "md": 650px,
+    "lg": 900px,
+    "xl": 1280px,
 );
 
-//@each $screen-name, $screen-starting-breakpoint in $screens {
-//  @mixin screen-#{$screen-name} {
-//    @media (min-width: #{$screen-starting-breakpoint}) {
-//      @content;
-//    }
-//  }
-//}
-
 @mixin screen-md {
-  @media (min-width: #{map-get($screens, md)}) {
-    @content;
-  }
+    @media (min-width: #{map-get($screens, md)}) {
+        @content;
+    }
 }
 
 @mixin screen-lg {
-  @media (min-width: #{map-get($screens, lg)}) {
-    @content;
-  }
+    @media (min-width: #{map-get($screens, lg)}) {
+        @content;
+    }
 }
-
 
 @mixin screen-xl {
-  @media (min-width: #{map-get($screens, xl)}) {
-    @content;
-  }
+    @media (min-width: #{map-get($screens, xl)}) {
+        @content;
+    }
 }
-

@@ -1,0 +1,11 @@
+@use "screens" as *;
+
+:root {
+    --_dimension-header-height-sm: 64px;
+    --_dimension-header-height-md: 70px;
+    --dimension-header-height: var(--_dimension-header-height-sm);
+
+    @include screen-md {
+        --dimension-header-height: var(--_dimension-header-height-md);
+    }
+}

@@ -1,0 +1,95 @@
+.menu {
+    overflow: hidden;
+    width: 52px;
+    height: 45px;
+    position: relative;
+    top: 2px;
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    transform-origin: center;
+    margin-inline-end: -13px;
+    scale: 0.5;
+}
+
+.menu span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 50%;
+    background: var(--color-on-background);
+    opacity: 1;
+    transform: rotate(0deg);
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+}
+
+.menu span:nth-child(even) {
+    left: 49%;
+    border-radius: 0 9px 9px 0;
+}
+
+.menu span:nth-child(odd) {
+    left: 0;
+    border-radius: 9px 0 0 9px;
+}
+
+.menu span:nth-child(1),
+.menu span:nth-child(2) {
+    top: 0;
+}
+
+.menu span:nth-child(3),
+.menu span:nth-child(4) {
+    top: 18px;
+}
+
+.menu span:nth-child(5),
+.menu span:nth-child(6) {
+    top: 36px;
+}
+
+.menu[aria-checked="true"] span:nth-child(1),
+.menu[aria-checked="true"] span:nth-child(6) {
+    transform: rotate(45deg);
+}
+
+.menu[aria-checked="true"] span:nth-child(2),
+.menu[aria-checked="true"] span:nth-child(5) {
+    transform: rotate(-45deg);
+}
+
+.menu[aria-checked="true"] span:nth-child(1) {
+    left: 2px;
+    top: 9px;
+}
+
+.menu[aria-checked="true"] span:nth-child(2) {
+    left: calc(50% - 5px);
+    top: 9px;
+}
+
+.menu[aria-checked="true"] span:nth-child(3) {
+    left: -50%;
+    opacity: 0;
+}
+
+.menu[aria-checked="true"] span:nth-child(4) {
+    left: 100%;
+    opacity: 0;
+}
+
+.menu[aria-checked="true"] span:nth-child(5) {
+    left: 2px;
+    top: 28px;
+}
+
+.menu[aria-checked="true"] span:nth-child(6) {
+    left: calc(50% - 5px);
+    top: 28px;
+}
