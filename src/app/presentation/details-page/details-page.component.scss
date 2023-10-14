@@ -1,0 +1,152 @@
+@use "../../../assets/styles" as *;
+
+.details-page {
+    --_border-radius: 4px;
+    --_border-radius-block: 16px;
+    --_gap: 2px;
+    width: 100%;
+
+    @include screen-md {
+        @include grid(2);
+
+        .chart-container {
+            grid-column: 1/3;
+        }
+    }
+}
+
+.currency-form {
+    @include card("background");
+    padding-inline: 16px;
+
+    position: sticky;
+    top: var(--dimension-header-height);
+
+    &::after,
+    &::before {
+        content: "";
+        height: 2em;
+        width: 2em;
+        position: absolute;
+        bottom: -2em;
+        border-radius: 0 24px 0 0;
+        box-shadow: 0 -16px 0 0 var(--color-background);
+    }
+
+    &::after {
+        right: 0;
+    }
+
+    &::before {
+        left: 0;
+        transform: scaleX(-1);
+    }
+
+    @include screen-md {
+        padding-block: 16px;
+        &::after,
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.main-exchange,
+.frequent-exchanges-list li {
+    @include card("surface");
+    padding-inline: 12px;
+    border-radius: var(--_border-radius);
+}
+
+.main-exchange-wrapper {
+    @include screen-md {
+        @include card("background");
+        padding: 16px;
+        position: sticky;
+        top: var(--dimension-header-height);
+    }
+}
+
+.main-exchange {
+    padding-block: 16px;
+    height: 100%;
+
+    .exchange-value {
+        @include text("display1");
+
+        span {
+            @include text("headline2");
+            color: var(--color-secondary);
+        }
+    }
+
+    .exchange-name {
+        @include text("title1");
+        color: var(--color-on-surface-variant);
+        font-weight: 400;
+    }
+
+    .exchange-difference {
+        @include text("label1");
+        @include card("secondary-container");
+        padding: 4px 8px;
+        margin-top: 16px;
+        width: fit-content;
+        border-radius: 4px;
+        font-weight: 400;
+    }
+
+    @include screen-md {
+        @include column(flex-start, center);
+        border-radius: 16px;
+        padding: 40px;
+
+        .exchange-difference {
+            margin-top: 32px;
+        }
+    }
+}
+
+.frequent-exchanges-list li {
+    padding-block: 16px;
+
+    .exchange-currencies {
+        @include text("label2");
+        margin-bottom: 12px;
+    }
+
+    .exchange-value {
+        @include text("headline2");
+        font-weight: 400;
+
+        span {
+            @include text("paragraph");
+            font-weight: 500;
+            color: var(--color-primary);
+        }
+    }
+
+    .exchange-difference {
+        @include text("label3");
+    }
+}
+
+.frequent-exchanges-list li:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.frequent-exchanges-list {
+    @include column(stretch);
+    gap: var(--_gap);
+    padding-block: var(--_gap);
+
+    @include screen-md {
+        @include grid(3);
+        gap: 4px;
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-inline: 16px;
+    }
+}
