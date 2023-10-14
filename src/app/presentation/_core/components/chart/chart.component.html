@@ -10,7 +10,13 @@
       <p class="x-item-label">
         <span>{{item.label}}</span>
       </p>
+
       <div class="connecting-line"
+           aria-expanded="true"
+           [style]="item.line['hypotenuse']"
+      ></div>
+      <div class="connecting-line"
+           aria-expanded="false"
            [style]="item.line['hypotenuse']"
       ></div>
       <div class="dot" [style]="'bottom: ' + item.percentage + '%;'"></div>

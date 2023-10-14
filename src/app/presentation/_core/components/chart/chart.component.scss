@@ -113,9 +113,30 @@
             position: absolute;
             height: 5px;
             width: 5px;
-            background: black;
+            background: white;
             transform-origin: center left;
             bottom: 0;
+            isolation: isolate;
+
+            &[aria-expanded="false"] {
+                z-index: 2;
+            }
+
+            &[aria-expanded="true"]:after {
+                content: "";
+                position: absolute;
+                left: -1px;
+                right: -1px;
+                height: 30px;
+                top: 5px;
+                z-index: -1;
+                mix-blend-mode: color-burn;
+                background: linear-gradient(
+                    0deg,
+                    rgba(223, 228, 235, 0) 43%,
+                    rgba(255, 0, 0, 0.1) 100%
+                );
+            }
         }
     }
 }

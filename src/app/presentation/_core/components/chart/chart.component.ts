@@ -92,7 +92,6 @@ export class ChartComponent implements AfterViewInit {
                 left: "0",
                 width: `${hypotenuse}px`,
                 bottom: `${x}%`,
-                background: "green",
                 "transform-origin": "center left",
                 transform: `rotate(${theta}deg)`,
             },
