@@ -28,7 +28,7 @@ $type-scale: (
         md: 32px,
         lg: 32px,
         font-weight: 500,
-        font-family: "Montserrat",
+        font-family: "Inter",
     ),
     title1: (
         sm: 20px,
@@ -59,13 +59,20 @@ $type-scale: (
         font-family: "Inter",
     ),
     label1: (
+        sm: 14px,
+        md: 16px,
+        lg: 16px,
+        font-weight: 500,
+        font-family: "Inter",
+    ),
+    label2: (
         sm: 12px,
         md: 14px,
         lg: 14px,
         font-weight: 500,
         font-family: "Inter",
     ),
-    label2: (
+    label3: (
         sm: 12px,
         md: 14px,
         lg: 14px,

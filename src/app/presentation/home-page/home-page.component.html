@@ -1,20 +1,21 @@
 <div class="home-page">
   <app-currency-form></app-currency-form>
   <div class="main-exchange">
-    <p>
-      4000.45
-      <span>USD</span>
+    <p class="exchange-value">
+      4000.45<span>USD</span>
     </p>
-    <p>United States Dollar</p>
-    <p>1.00 EUR = 1.34 USD</p>
+    <p class="exchange-name">United States Dollar</p>
+    <p class="exchange-difference">1.00 EUR = 1.34 USD</p>
   </div>
   <ul class="frequent-exchanges-list">
     <li *ngFor="let currency of frequentCurrencies">
-      <p>
-        4334.45
-        <span>JPY</span>
+      <p class="exchange-currencies">
+        USD/JPY
       </p>
-      <p>1.00 EUR = 1.34 USD</p>
+      <p class="exchange-value">
+        4334.45<span>JPY</span>
+      </p>
+      <p class="exchange-difference">1.00 JPY = 1.34 USD</p>
     </li>
   </ul>
 </div>

@@ -12,7 +12,7 @@ $colors: (
         "content": "#3e2645",
     ),
     "secondary-container": (
-        "container": "#563c5d",
+        "container": "#563c5dAA",
         "content": "#f8d6fe",
     ),
     "background": (
@@ -23,6 +23,10 @@ $colors: (
         "container": "#1e2633",
         "content": "#dce0ec",
     ),
+  "surface-variant": (
+    "container": "#1e2633",
+    "content": "#bfc2d2",
+  ),
     "outline": (
         "container": "#353a41",
         "content": "#d8defd",

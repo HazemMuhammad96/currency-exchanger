@@ -17,10 +17,55 @@
     border-top-left-radius: var(--_border-radius-block);
     border-top-right-radius: var(--_border-radius-block);
     padding-block: 16px;
+
+    .exchange-value {
+        @include text("display1");
+
+        span {
+            @include text("headline2");
+            color: var(--color-secondary);
+        }
+    }
+
+    .exchange-name {
+        @include text("title1");
+        color: var(--color-on-surface-variant);
+        font-weight: 400;
+    }
+
+    .exchange-difference {
+        @include text("label1");
+        @include card("secondary-container");
+        padding: 4px 8px;
+        margin-top: 16px;
+        width: fit-content;
+        border-radius: 4px;
+        font-weight: 400;
+    }
 }
 
 .frequent-exchanges-list li {
     padding-block: 16px;
+
+    .exchange-currencies {
+        @include text("label2");
+        margin-bottom: 12px;
+    }
+
+    .exchange-value {
+        @include text("headline2");
+        font-weight: 400;
+
+        span {
+            @include text("paragraph");
+            font-weight: 500;
+            color: var(--color-primary);
+        }
+    }
+
+    .exchange-difference {
+        @include text("label3");
+    }
 }
 
 .frequent-exchanges-list li:last-child {
