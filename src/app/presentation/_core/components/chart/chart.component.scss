@@ -1,0 +1,121 @@
+@use "../../../../../assets/styles" as *;
+
+.chart-container {
+    --_label-height: 38px;
+    --_label-margin: 32px;
+    --_label-column-height: calc(var(--_label-height) + var(--_label-margin));
+
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: var(--_label-column-height) 2px 1fr;
+    grid-template-rows: 1fr 2px var(--_label-column-height);
+    grid-template-areas:
+        "y-label y-line chart"
+        ". x-line x-line"
+        ". x-label x-label";
+    position: relative;
+
+    &:before,
+    &:after {
+        content: "";
+        background: red;
+    }
+
+    &:before {
+        grid-area: y-line;
+    }
+
+    &:after {
+        grid-area: x-line;
+    }
+
+    .x-label,
+    .y-label {
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        padding-block: 8px;
+    }
+
+    .y-label {
+        position: absolute;
+        bottom: var(--_label-margin);
+        left: 0;
+        right: 0;
+        width: calc(300px - var(--_label-column-height));
+        text-align: center;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+    }
+
+    .x-label {
+        grid-area: x-label;
+        text-align: center;
+        margin-top: var(--_label-margin);
+    }
+
+    .chart {
+        grid-area: chart;
+    }
+}
+
+.chart {
+    width: 100%;
+    height: 100%;
+    background: rebeccapurple;
+    display: grid;
+
+    .x-item {
+        position: relative;
+
+        &:after {
+            --_x-indicator-height: 5px;
+            --_x-indicator-width: 2px;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            content: "";
+            position: absolute;
+            bottom: calc(-1 * (var(--_x-indicator-height) + 2px));
+            right: calc(-1 * (var(--_x-indicator-width) / 2));
+            width: var(--_x-indicator-width);
+            height: var(--_x-indicator-height);
+            background: red;
+        }
+
+        .x-item-label {
+            position: absolute;
+            bottom: -26px;
+            left: 0;
+            text-align: center;
+            right: -100%;
+
+            span {
+                transform: scale(0.8);
+                @include text("label3");
+                display: block;
+                width: 50%;
+                margin-inline: auto;
+                overflow: hidden;
+            }
+        }
+
+        .dot {
+            --_dot-size: 5px;
+            position: absolute;
+            width: var(--_dot-size);
+            height: var(--_dot-size);
+            border-radius: 50%;
+            background: white;
+            right: calc(-1 * (var(--_dot-size) / 2));
+        }
+
+        .connecting-line {
+            position: absolute;
+            height: 5px;
+            width: 5px;
+            background: black;
+            transform-origin: center left;
+            bottom: 0;
+        }
+    }
+}

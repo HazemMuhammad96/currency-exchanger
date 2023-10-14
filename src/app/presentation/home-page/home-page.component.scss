@@ -29,7 +29,7 @@
     top: var(--dimension-header-height);
 
     @include screen-md {
-        @include inverted-border(16px);
+        @include inverted-border(12px);
         padding-block: 16px;
 
         &::before {
@@ -51,7 +51,7 @@
 .main-exchange-wrapper {
     @include screen-md {
         @include card("background");
-        @include inverted-border(16px);
+        @include inverted-border(12px);
         &::after {
             right: 16px;
         }
