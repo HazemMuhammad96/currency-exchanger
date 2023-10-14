@@ -29,3 +29,29 @@ button {
     cursor: pointer;
     outline: transparent;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input,
+select,
+fieldset {
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: transparent;
+    max-width: 100%;
+}
+
+select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

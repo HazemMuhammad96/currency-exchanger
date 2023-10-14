@@ -13,8 +13,8 @@
 @mixin column($main-axis: flex-start, $cross-axis: flex-start) {
     display: flex;
     flex-direction: column;
-    justify-content: $main-axis;
-    align-items: $cross-axis;
+    justify-content: $cross-axis;
+    align-items: $main-axis;
 }
 
 @mixin centered {

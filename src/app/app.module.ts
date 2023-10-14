@@ -9,6 +9,8 @@ import { NgOptimizedImage } from "@angular/common";
 import { IconComponent } from "./presentation/_core/components/icon/icon.component";
 import { MenuButtonComponent } from "./presentation/_core/layout/nav/menu-button/menu-button.component";
 import { CurrencyFormComponent } from './presentation/currency-form/currency-form.component';
+import { HomePageComponent } from './presentation/home-page/home-page.component';
+import { DetailsPageComponent } from './presentation/details-page/details-page.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { CurrencyFormComponent } from './presentation/currency-form/currency-for
         IconComponent,
         MenuButtonComponent,
         CurrencyFormComponent,
+        HomePageComponent,
+        DetailsPageComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, NgOptimizedImage],
     providers: [],

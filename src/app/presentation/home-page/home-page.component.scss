@@ -1,0 +1,35 @@
+@use "../../../assets/styles" as *;
+
+.home-page {
+    --_border-radius: 4px;
+    --_border-radius-block: 16px;
+    --_gap: 2px;
+}
+
+.main-exchange,
+.frequent-exchanges-list li {
+    @include card("surface");
+    padding-inline: 12px;
+    border-radius: var(--_border-radius);
+}
+
+.main-exchange {
+    border-top-left-radius: var(--_border-radius-block);
+    border-top-right-radius: var(--_border-radius-block);
+    padding-block: 16px;
+}
+
+.frequent-exchanges-list li {
+    padding-block: 16px;
+}
+
+.frequent-exchanges-list li:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.frequent-exchanges-list {
+    @include column(stretch);
+    gap: var(--_gap);
+    padding-block: var(--_gap);
+}

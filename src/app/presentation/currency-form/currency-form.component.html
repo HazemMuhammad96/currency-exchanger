@@ -1,1 +1,33 @@
-<p>currency-form works!</p>
+<form class="currency-form">
+  <input class="currency-input" type="number" min="1"
+         placeholder="Enter amount"
+         pattern="[0-9]"
+         name="currency">
+  <fieldset [disabled]="'disabled'">
+    <div class="currencies-selector">
+      <select>
+        <option value="USD">USD</option>
+      </select>
+      <button type='button'>
+        <span class="material-symbols-outlined">swap_horiz</span>
+      </button>
+      <select>
+        <option value="USD">USD</option>
+      </select>
+    </div>
+    <div class="actions-container">
+      <button class="secondary-button" type="reset">
+        <span class="icon material-symbols-outlined">clear_all</span>
+        <span class="text">Clear</span>
+      </button>
+      <button class="primary-button" type="submit">
+        <span class="icon material-symbols-outlined">done</span>
+      </button>
+      <button class="secondary-button" type="button">
+        <span class="icon material-symbols-outlined">read_more</span>
+        <span class="text">Details</span>
+      </button>
+    </div>
+  </fieldset>
+
+</form>
