@@ -1,35 +1,9 @@
 @use "../../../assets/styles" as *;
 
-.currency-form {
-    @include card("background");
-    padding-inline: 16px;
-    position: sticky;
-    top: var(--dimension-header-height);
-
-    &::after,
-    &::before {
-        content: "";
-        height: 2em;
-        width: 2em;
-        position: absolute;
-        bottom: -2em;
-        border-radius: 0 24px 0 0;
-        box-shadow: 0 -16px 0 0 var(--color-background);
-    }
-
-    &::after {
-        right: 0;
-    }
-
-    &::before {
-        left: 0;
-        transform: scaleX(-1);
-    }
-}
-
 .currency-input {
     @include text("headline1");
     padding-block: 24px;
+    width: 100%;
 
     &::placeholder,
     &::-webkit-input-placeholder {
