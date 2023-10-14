@@ -12,6 +12,7 @@ import { CurrencyFormComponent } from './presentation/currency-form/currency-for
 import { HomePageComponent } from './presentation/home-page/home-page.component';
 import { DetailsPageComponent } from './presentation/details-page/details-page.component';
 import { ChartComponent } from './presentation/_core/components/chart/chart.component';
+import { IconButtonComponent } from './presentation/_core/components/buttons/icon-button/icon-button.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { ChartComponent } from './presentation/_core/components/chart/chart.comp
         HomePageComponent,
         DetailsPageComponent,
         ChartComponent,
+        IconButtonComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, NgOptimizedImage],
     providers: [],

@@ -1,0 +1,26 @@
+@use "../../../../../../assets/styles" as *;
+
+.icon-button {
+    @include column(center);
+    @include text("label2");
+    gap: 12px;
+    color: #bdc4d2;
+    position: relative;
+
+    .text {
+        position: absolute;
+        bottom: -26px;
+    }
+
+    .icon {
+        @include card("primary-container");
+        @include centered;
+        color: var(--color-on-surface);
+        font-size: 24px;
+        padding: 8px;
+        width: 44px;
+        min-width: 44px;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+    }
+}
