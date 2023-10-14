@@ -1,0 +1,21 @@
+@mixin inverted-border($radius: 24px, $color: var(--color-background)) {
+    &::after,
+    &::before {
+        content: "";
+        height: 2em;
+        width: 2em;
+        position: absolute;
+        bottom: -2em;
+        border-radius: 0 $radius 0 0;
+        box-shadow: 0 -16px 0 0 $color;
+    }
+
+    &::after {
+        right: 0;
+    }
+
+    &::before {
+        left: 0;
+        transform: scaleX(-1);
+    }
+}

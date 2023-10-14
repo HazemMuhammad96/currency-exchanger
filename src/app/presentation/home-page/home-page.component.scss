@@ -15,37 +15,27 @@
     }
 }
 
+.currency-form,
+.main-exchange-wrapper {
+    z-index: 2;
+}
+
 .currency-form {
     @include card("background");
+    @include inverted-border;
     padding-inline: 16px;
 
     position: sticky;
     top: var(--dimension-header-height);
 
-    &::after,
-    &::before {
-        content: "";
-        height: 2em;
-        width: 2em;
-        position: absolute;
-        bottom: -2em;
-        border-radius: 0 24px 0 0;
-        box-shadow: 0 -16px 0 0 var(--color-background);
-    }
-
-    &::after {
-        right: 0;
-    }
-
-    &::before {
-        left: 0;
-        transform: scaleX(-1);
-    }
-
     @include screen-md {
+        @include inverted-border(16px);
         padding-block: 16px;
-        &::after,
+
         &::before {
+            left: 16px;
+        }
+        &::after {
             display: none;
         }
     }
@@ -61,6 +51,13 @@
 .main-exchange-wrapper {
     @include screen-md {
         @include card("background");
+        @include inverted-border(16px);
+        &::after {
+            right: 16px;
+        }
+        &::before {
+            display: none;
+        }
         padding: 16px;
         position: sticky;
         top: var(--dimension-header-height);
@@ -148,5 +145,6 @@
         border-radius: 16px;
         overflow: hidden;
         margin-inline: 16px;
+        margin-bottom: 16px;
     }
 }
