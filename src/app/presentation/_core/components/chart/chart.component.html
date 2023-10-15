@@ -7,6 +7,11 @@
        [style]="'grid-template-columns: repeat(' + (data.size + 1) + ', 1fr);'"
   >
     <div #chartItem class="x-item" *ngFor="let item of points; index as i">
+
+      <div class="y-item-label" *ngFor="let rangeItem of yRangeLabels" [attr.aria-hidden]="i!==0" [style]="rangeItem.style">
+        {{rangeItem.label}}
+      </div>
+
       <p class="x-item-label">
         <span>{{item.label}}</span>
       </p>

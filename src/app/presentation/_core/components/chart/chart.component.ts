@@ -5,7 +5,6 @@ import {
     HostListener,
     ViewChild,
 } from "@angular/core";
-import { max } from "rxjs";
 
 type NodeDescription = { label: string; value: number };
 type ChartData = Map<string, NodeDescription> | Map<number, NodeDescription>;
@@ -67,6 +66,18 @@ export class ChartComponent implements AfterViewInit {
             (currentInterval - intervalLength).toFixed(4)
         );
         return chartNumbers;
+    }
+
+    get yRangeLabels() {
+        const max = this.yRange.at(-1) ?? 0;
+        return this.yRange.map((it) => {
+            return {
+                label: it.toString(),
+                style: {
+                    bottom: `${Number(((it / max) * 100).toFixed(4))}%`,
+                },
+            };
+        });
     }
 
     calculateLine(x: number, y: number) {

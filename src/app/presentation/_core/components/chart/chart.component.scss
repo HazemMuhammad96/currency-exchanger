@@ -3,13 +3,23 @@
 .chart-container {
     --_label-height: 38px;
     --_label-margin: 32px;
+    --_label-margin-y: 50px;
     --_label-column-height: calc(var(--_label-height) + var(--_label-margin));
+    --_axis-width: 3px;
+    --_dot-size: 3px;
+    --_line-height: 3px;
+    --_color-chart: var(--color-background);
+    --_color-axis: var(--color-on-background);
+    --_color-points-label: var(--color-on-background);
+    --_color-dots: var(--color-primary);
+    --_color-line: var(--color-primary);
+    --_color-line-shadow: rgba(167, 192, 251, 0.1);
 
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: var(--_label-column-height) 2px 1fr;
-    grid-template-rows: 1fr 2px var(--_label-column-height);
+    grid-template-columns: var(--_label-column-height) var(--_axis-width) 1fr;
+    grid-template-rows: 1fr var(--_axis-width) var(--_label-column-height);
     grid-template-areas:
         "y-label y-line chart"
         ". x-line x-line"
@@ -19,7 +29,8 @@
     &:before,
     &:after {
         content: "";
-        background: red;
+        background: var(--_color-axis);
+        z-index: 3;
     }
 
     &:before {
@@ -35,6 +46,7 @@
         font-size: 18px;
         letter-spacing: 1.5px;
         padding-block: 8px;
+        color: inherit;
     }
 
     .y-label {
@@ -62,7 +74,7 @@
 .chart {
     width: 100%;
     height: 100%;
-    background: rebeccapurple;
+    background: var(--_color-chart);
     display: grid;
 
     .x-item {
@@ -79,7 +91,18 @@
             right: calc(-1 * (var(--_x-indicator-width) / 2));
             width: var(--_x-indicator-width);
             height: var(--_x-indicator-height);
-            background: red;
+            background: var(--_color-axis);
+        }
+
+        .y-item-label {
+            position: absolute;
+            left: -32px;
+            @include text("label3");
+            transform: scale(0.8);
+
+            &[aria-hidden="true"] {
+                display: none;
+            }
         }
 
         .x-item-label {
@@ -88,6 +111,7 @@
             left: 0;
             text-align: center;
             right: -100%;
+            color: var(--_color-points-label);
 
             span {
                 transform: scale(0.8);
@@ -100,20 +124,19 @@
         }
 
         .dot {
-            --_dot-size: 5px;
             position: absolute;
             width: var(--_dot-size);
             height: var(--_dot-size);
             border-radius: 50%;
-            background: white;
+            background: var(--_color-dots);
             right: calc(-1 * (var(--_dot-size) / 2));
         }
 
         .connecting-line {
             position: absolute;
-            height: 5px;
-            width: 5px;
-            background: white;
+            height: var(--_dot-size);
+            width: var(--_dot-size);
+            background: var(--_color-line);
             transform-origin: center left;
             bottom: 0;
             isolation: isolate;
@@ -127,14 +150,14 @@
                 position: absolute;
                 left: -1px;
                 right: -1px;
-                height: 30px;
-                top: 5px;
+                height: 0;
+                top: var(--_dot-size);
                 z-index: -1;
                 mix-blend-mode: color-burn;
                 background: linear-gradient(
                     0deg,
                     rgba(223, 228, 235, 0) 43%,
-                    rgba(255, 0, 0, 0.1) 100%
+                    var(--_color-line-shadow) 100%
                 );
             }
         }
