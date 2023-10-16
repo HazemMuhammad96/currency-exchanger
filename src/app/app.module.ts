@@ -14,7 +14,7 @@ import { DetailsPageComponent } from "./presentation/details-page/details-page.c
 import { ChartComponent } from "./presentation/_core/components/chart/chart.component";
 import { IconButtonComponent } from "./presentation/_core/components/buttons/icon-button/icon-button.component";
 import { CurrenciesSelectorComponent } from "./presentation/currency-exchanger/currencies-selector/currencies-selector.component";
-import { DetailsCurrencyExchangerComponent } from "./presentation/currency-exchanger/details-currency-exchanger/details-currency-exchanger.component";
+import { DetailedCurrencyFormComponent } from "./presentation/currency-exchanger/detailed-currency-form/detailed-currency-form.component";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -31,7 +31,7 @@ import { ReactiveFormsModule } from "@angular/forms";
         ChartComponent,
         IconButtonComponent,
         CurrenciesSelectorComponent,
-        DetailsCurrencyExchangerComponent,
+        DetailedCurrencyFormComponent,
     ],
     imports: [
         BrowserModule,

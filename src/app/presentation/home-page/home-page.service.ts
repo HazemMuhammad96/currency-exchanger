@@ -1,70 +1,45 @@
 import { Injectable } from "@angular/core";
 import CurrencyRepository from "../../data/currency-repository";
-import GetCurrenciesUseCase from "../../domain/usecases/get-currencies-usecase";
-import { BehaviorSubject } from "rxjs";
 import Exchange from "../../domain/models/exchange";
-import ExchangeRateUseCase from "../../domain/usecases/exchange-rate-usecase";
 import Currency from "../../domain/models/currency";
+import {
+    CommonExchangePageData,
+    ExchangeService,
+} from "../_core/services/exchange.service";
 
-export interface HomePageData {
-    enabled: boolean;
-    currencies: Map<string, Currency>;
+export interface HomePageData extends CommonExchangePageData {
     frequentCurrencies: Array<Currency>;
-    baseCurrency: string;
-    toCurrency: string;
-    mainExchange?: Exchange;
-    baseExchange?: Exchange;
     frequentExchanges: Array<Exchange>;
 }
 
 @Injectable({
     providedIn: "root",
 })
-export class HomePageService {
-    public homePageData: BehaviorSubject<HomePageData> =
-        new BehaviorSubject<HomePageData>({
-            enabled: false,
-            currencies: new Map<string, Currency>(),
-            frequentCurrencies: [],
-            baseCurrency: "EUR",
-            toCurrency: "USD",
-            mainExchange: undefined,
-            frequentExchanges: [],
-        });
-    private readonly getCurrenciesUseCase: GetCurrenciesUseCase;
-    private readonly exchangeUseCase: ExchangeRateUseCase;
-
+export class HomePageService extends ExchangeService<HomePageData> {
     constructor(currencyRepository: CurrencyRepository) {
-        this.getCurrenciesUseCase = new GetCurrenciesUseCase(
+        super(
+            {
+                enabled: false,
+                currencies: new Map<string, Currency>(),
+                frequentCurrencies: [],
+                baseCurrency: "EUR",
+                toCurrency: "USD",
+                mainExchange: undefined,
+                frequentExchanges: [],
+            },
             currencyRepository
         );
-        this.exchangeUseCase = new ExchangeRateUseCase(
-            this.getCurrenciesUseCase
-        );
 
-        this.fetchCurrencies();
-        this.convertBase();
+        this.convertBasePopular();
     }
 
-    private fetchCurrencies() {
-        this.getCurrenciesUseCase.execute().then((data) => {
-            this.homePageData.next({
-                ...this.homePageData.value,
-                currencies: data.rates,
-                frequentCurrencies: Array.from(data.rates.values()).slice(0, 9),
-            });
-        });
-    }
 
-    get currenciesNames(): Array<string> {
-        return Array.from(this.homePageData.value.currencies.keys());
-    }
 
     public listenToChange(amount: number, from: string, to: string) {
-        const prevFrom = this.homePageData.value.baseCurrency;
-        const prevTo = this.homePageData.value.toCurrency;
-        this.homePageData.next({
-            ...this.homePageData.value,
+        const prevFrom = this.pageData.value.baseCurrency;
+        const prevTo = this.pageData.value.toCurrency;
+        this.pageData.next({
+            ...this.pageData.value,
             enabled: amount > 0,
             baseCurrency: from,
             toCurrency: to,
@@ -78,27 +53,17 @@ export class HomePageService {
         }
     }
 
-    private convert(amount: number, to: string) {
-        const from = this.homePageData.value.baseCurrency;
-        return this.exchangeUseCase.execute(amount, from, to);
-    }
-
-    private async convertBase() {
-        const baseExchange = await this.convert(
-            1,
-            this.homePageData.value.toCurrency
-        );
+    private async convertBasePopular() {
         const frequentExchanges = await this.convertPopular(1);
-        this.homePageData.next({
-            ...this.homePageData.value,
-            baseExchange,
+        this.pageData.next({
+            ...this.pageData.value,
             frequentExchanges,
         });
     }
 
     private async convertPopular(amount: number) {
         const frequentExchangesPromise =
-            this.homePageData.value.frequentCurrencies.map(
+            this.pageData.value.frequentCurrencies.map(
                 async (currency: Currency) => {
                     return await this.convert(amount, currency.shortName);
                 }
@@ -107,12 +72,12 @@ export class HomePageService {
     }
 
     public async exchange(amount: number) {
-        const to = this.homePageData.value.toCurrency;
+        const to = this.pageData.value.toCurrency;
         const mainExchange: Exchange = await this.convert(amount, to);
         const frequentExchanges: Array<Exchange> =
             await this.convertPopular(amount);
-        this.homePageData.next({
-            ...this.homePageData.value,
+        this.pageData.next({
+            ...this.pageData.value,
             mainExchange,
             frequentExchanges,
         });

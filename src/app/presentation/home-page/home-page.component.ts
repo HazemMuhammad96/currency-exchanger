@@ -16,13 +16,13 @@ export class HomePageComponent {
         private formBuilder: FormBuilder,
         private homePageService: HomePageService
     ) {
-        this.homePageData = this.homePageService.homePageData.value;
+        this.homePageData = this.homePageService.pageData.value;
         this.exchangeForm = this.formBuilder.group({
             amount: undefined,
             from: "EUR",
             to: "USD",
         });
-        this.homePageService.homePageData.subscribe((data) => {
+        this.homePageService.pageData.subscribe((data) => {
             this.homePageData = data;
         });
     }
