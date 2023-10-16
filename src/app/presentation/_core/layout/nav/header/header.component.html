@@ -1,8 +1,8 @@
 <header class="header">
-  <div class="logo-container">
+  <a routerLink="/" class="logo-container">
     <i class="material-symbols-outlined logo">currency_exchange</i>
     <span class="title">Currency Exchanger</span>
-  </div>
+  </a>
   <nav [attr.aria-expanded]="isMenuOpen" class="nav" [class.open]="isMenuOpen">
     <ul>
       <li *ngFor="let route of routes">

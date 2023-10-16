@@ -1,0 +1,33 @@
+@use "../../../../assets/styles" as *;
+
+.header {
+    @include text("title1");
+    @include row(space-between);
+    font-family: "Montserrat", sans-serif;
+    padding-block: 8px;
+    margin-inline-end: -8px;
+    width: calc(100% + 8px);
+}
+
+.currency-input {
+    @include text("headline1");
+    padding-block: 24px;
+    width: 100%;
+
+    &::placeholder,
+    &::-webkit-input-placeholder {
+        color: darken(#dce0ec, 10%);
+    }
+}
+
+.actions-container {
+    @include row;
+
+    *:first-child {
+        flex: 1;
+    }
+
+    gap: 16px;
+    width: 100%;
+    padding-block: 24px;
+}

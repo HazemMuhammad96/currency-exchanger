@@ -7,11 +7,6 @@
     color: #bdc4d2;
     position: relative;
 
-    .text {
-        position: absolute;
-        bottom: -26px;
-    }
-
     .icon {
         @include card("primary-container");
         @include centered;
@@ -22,5 +17,65 @@
         min-width: 44px;
         border-radius: 50%;
         aspect-ratio: 1/1;
+        transition: all 0.1s ease-in-out;
+    }
+
+    &[data-size="expanded"] {
+        .icon {
+            border-radius: 50%;
+            width: 76px;
+            min-width: 76px;
+            padding: 20px;
+            font-size: 32px !important;
+            aspect-ratio: 1/1;
+        }
+    }
+
+    &[data-color="primary"] {
+        .icon {
+            @include card("primary");
+        }
+    }
+
+    &[data-color="none"] {
+        .icon {
+            @include card("background");
+        }
+    }
+
+    &[data-label="overlay"] {
+        .text {
+            position: absolute;
+            bottom: -26px;
+        }
+    }
+
+    &[data-label="hidden"] {
+        .text {
+            display: none;
+        }
+    }
+}
+
+.icon-button:hover {
+    .icon {
+        filter: brightness(95%);
+        outline: 5px solid rgba(167, 192, 251, 0.35);
+    }
+}
+
+.icon-button:active {
+    .icon {
+        filter: brightness(75%);
+        outline: 0 solid rgba(167, 192, 251, 0.35);
+    }
+}
+
+@keyframes icon-active {
+    0% {
+        outline: 1px solid transparent;
+    }
+    100% {
+        outline: 100px solid rgba(167, 192, 251, 0.35);
     }
 }

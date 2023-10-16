@@ -1,29 +1,22 @@
-<link rel="stylesheet" href="currency-form.component.scss">
 <form class="currency-form">
   <input class="currency-input" type="number" min="1"
          placeholder="Enter amount"
          pattern="[0-9]"
          name="currency">
   <fieldset [disabled]="'disabled'">
-    <div class="currencies-selector">
-      <select>
-        <option value="USD">USD</option>
-      </select>
-      <button type='button'>
-        <span class="material-symbols-outlined">swap_horiz</span>
-      </button>
-      <select>
-        <option value="USD">USD</option>
-      </select>
-    </div>
+    <app-currencies-selector></app-currencies-selector>
     <div class="actions-container">
-      <app-icon-button label="Clear" type="reset">
+      <app-icon-button label="Clear" label-placement="overlay" type="reset">
         <span class="icon material-symbols-outlined">clear_all</span>
       </app-icon-button>
-      <button class="primary-button" type="submit">
-        <span class="icon material-symbols-outlined">done</span>
-      </button>
-      <app-icon-button label="Details" type="link">
+      <app-icon-button
+        color="primary" size="expanded"
+        label="Clear" type="submit"
+        label-placement="hidden"
+      >
+        <span class="material-symbols-outlined" style="font-size: 32px">done</span>
+      </app-icon-button>
+      <app-icon-button label="Details" label-placement="overlay" type="link">
         <span class="icon material-symbols-outlined">read_more</span>
       </app-icon-button>
     </div>

@@ -1,0 +1,11 @@
+<div class="currencies-selector">
+  <select [disabled]="direction==='uni'">
+    <option value="USD">USD</option>
+  </select>
+  <button type='button'>
+    <span class="material-symbols-outlined">{{direction === "bi" ? "swap_horiz" : "trending_flat"}}</span>
+  </button>
+  <select>
+    <option value="USD">USD</option>
+  </select>
+</div>

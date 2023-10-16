@@ -11,23 +11,6 @@
     }
 }
 
-.currencies-selector {
-    @include row;
-    gap: 12px;
-
-    select {
-        @include card("surface");
-        @include text("title3");
-        flex: 1 0 0;
-        padding: 12px 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    button {
-        color: var(--color-on-background);
-    }
-}
 
 .actions-container {
     @include row;

@@ -11,4 +11,5 @@ export class IconButtonComponent {
     @Input("label-placement") labelPlacement: "block" | "overlay" | "hidden" =
         "hidden";
     @Input("type") type: "submit" | "reset" | "button" | "link" = "button";
+    @Input("color") color: "primary" | "none" | "default" = "default";
 }

@@ -1,0 +1,19 @@
+<form class="details-currency-form">
+  <header class="header">
+    <h1>EURO Details</h1>
+    <app-icon-button color="none" label="back">
+      <span class="material-symbols-outlined">close</span>
+    </app-icon-button>
+  </header>
+  <input class="currency-input" type="number" min="1"
+         placeholder="Enter amount"
+         pattern="[0-9]"
+         name="currency">
+  <fieldset class="actions-container" [disabled]="'disabled'">
+    <app-currencies-selector direction="uni"></app-currencies-selector>
+    <app-icon-button color="primary" label="Convert" label-placement="hidden" type="submit">
+      <span class="icon material-symbols-outlined">done</span>
+    </app-icon-button>
+  </fieldset>
+
+</form>
