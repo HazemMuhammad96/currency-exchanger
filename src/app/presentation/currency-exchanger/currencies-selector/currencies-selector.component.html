@@ -7,9 +7,9 @@
       {{currency}}
     </option>
   </select>
-  <button type='button'>
+  <app-icon-button [disabled]="direction==='uni'" (click)="switchCurrencies()" color="none" type='button'>
     <span class="material-symbols-outlined">{{direction === "bi" ? "swap_horiz" : "trending_flat"}}</span>
-  </button>
+  </app-icon-button>
   <select formControlName="to">
     <option *ngFor="let currency of currencies"
             [value]="currency"

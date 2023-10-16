@@ -7,7 +7,8 @@ import { Component, Input } from "@angular/core";
 })
 export class IconButtonComponent {
     @Input("size") size: "regular" | "expanded" | "custom" = "regular";
-    @Input("label") label = "";
+    @Input() label = "";
+    @Input() disabled = false;
     @Input("label-placement") labelPlacement: "block" | "overlay" | "hidden" =
         "hidden";
     @Input("type") type: "submit" | "reset" | "button" | "link" = "button";

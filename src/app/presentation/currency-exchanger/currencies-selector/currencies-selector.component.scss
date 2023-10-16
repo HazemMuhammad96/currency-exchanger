@@ -3,7 +3,7 @@
 .currencies-selector {
     @include row;
     width: 100%;
-    gap: 12px;
+    gap: 8px;
 
     select {
         @include card("surface");

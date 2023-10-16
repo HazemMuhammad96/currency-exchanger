@@ -10,4 +10,12 @@ export class CurrenciesSelectorComponent {
     @Input("direction") direction: "uni" | "bi" = "bi";
     @Input("formGroup") formGroup!: FormGroup;
     @Input() currencies: Array<string> = [];
+
+    switchCurrencies() {
+        if (this.direction === "uni") return;
+        const from = this.formGroup.get("from")?.value;
+        const to = this.formGroup.get("to")?.value;
+        this.formGroup.get("from")?.setValue(to);
+        this.formGroup.get("to")?.setValue(from);
+    }
 }
