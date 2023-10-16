@@ -16,9 +16,11 @@
       >
         <span class="material-symbols-outlined" style="font-size: 32px">done</span>
       </app-icon-button>
-      <app-icon-button label="Details" label-placement="overlay" type="link">
-        <span class="icon material-symbols-outlined">read_more</span>
-      </app-icon-button>
+      <a [routerLink]="'/details/' + exchangeForm.value['from'] + '-' + exchangeForm.value['to']">
+        <app-icon-button label="Details" label-placement="overlay">
+          <span class="icon material-symbols-outlined">read_more</span>
+        </app-icon-button>
+      </a>
     </div>
   </fieldset>
 
