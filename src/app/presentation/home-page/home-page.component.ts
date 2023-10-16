@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import CurrencyRepository from "../../data/currency-repository";
 import exchangeRateUseCase from "../../domain/exchange-rate-usecase";
+import ExchangePopularCurrenciesUseCase from "../../domain/exchange-popular-currencies-usecase";
 
 @Component({
     selector: "app-home-page",
@@ -19,13 +20,14 @@ export class HomePageComponent {
         currencyRepository.getCurrencies().subscribe((data) => {
             console.log(data);
         });
-        exchangeRateUseCase(currencyRepository, 1, "EUR", "USD").then(
-            (value) => {
-                console.log({ value });
-            }
-        );
+        ExchangePopularCurrenciesUseCase(
+            currencyRepository,
+            1,
+            "EUR",
+        ).then((value) => {
+            console.log({ value });
+        });
     }
 
     // ngOnInit(): void {}
-
 }

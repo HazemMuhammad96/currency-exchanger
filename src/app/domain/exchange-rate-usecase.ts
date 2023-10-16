@@ -1,12 +1,15 @@
 import CurrencyRepository from "../data/currency-repository";
-import CurrencyFullNameUseCase from "./currency-name-usecase";
+import GetCurrencyFullNameUseCase from "./get-currency-name-usecase";
 
 export default function exchangeRateUseCase(
     currencyRepository: CurrencyRepository,
     amount: number,
     fromCurrency: string,
     toCurrency: string
-) {
+):Promise<{
+    value: number;
+    name: string;
+}> {
     return new Promise((resolve, reject) => {
         currencyRepository.getCurrencies().subscribe((currenciesInfo) => {
             const fromCurrencyRate =
@@ -16,7 +19,7 @@ export default function exchangeRateUseCase(
             const finalValue = fromToBase * toCurrencyRate;
             resolve({
               value: finalValue,
-              name: CurrencyFullNameUseCase(toCurrency),
+              name: GetCurrencyFullNameUseCase(toCurrency),
             });
         });
     });
