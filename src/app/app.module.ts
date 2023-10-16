@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./presentation/_core/layout/nav/header/header.component";
 import { RootComponent } from "./presentation/_core/layout/root/root.component";
 import { NgOptimizedImage } from "@angular/common";
-import { IconComponent } from "./presentation/_core/components/icon/icon.component";
 import { MenuButtonComponent } from "./presentation/_core/layout/nav/menu-button/menu-button.component";
 import { CurrencyFormComponent } from "./presentation/currency-exchanger/currency-form/currency-form.component";
 import { HomePageComponent } from "./presentation/home-page/home-page.component";
@@ -17,13 +16,13 @@ import { CurrenciesSelectorComponent } from "./presentation/currency-exchanger/c
 import { DetailedCurrencyFormComponent } from "./presentation/currency-exchanger/detailed-currency-form/detailed-currency-form.component";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ExchangeResultComponent } from './presentation/currency-exchanger/exchange-result/exchange-result.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         RootComponent,
-        IconComponent,
         MenuButtonComponent,
         CurrencyFormComponent,
         HomePageComponent,
@@ -32,6 +31,7 @@ import { ReactiveFormsModule } from "@angular/forms";
         IconButtonComponent,
         CurrenciesSelectorComponent,
         DetailedCurrencyFormComponent,
+        ExchangeResultComponent,
     ],
     imports: [
         BrowserModule,

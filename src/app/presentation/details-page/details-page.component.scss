@@ -52,7 +52,6 @@
     }
 }
 
-.main-exchange,
 .frequent-exchanges-list li {
     @include card("surface");
     padding-inline: 12px;
@@ -65,46 +64,6 @@
         padding: 16px;
         position: sticky;
         top: var(--dimension-header-height);
-    }
-}
-
-.main-exchange {
-    padding-block: 16px;
-    height: 100%;
-
-    .exchange-value {
-        @include text("display1");
-
-        span {
-            @include text("headline2");
-            color: var(--color-secondary);
-        }
-    }
-
-    .exchange-name {
-        @include text("title1");
-        color: var(--color-on-surface-variant);
-        font-weight: 400;
-    }
-
-    .exchange-difference {
-        @include text("label1");
-        @include card("secondary-container");
-        padding: 4px 8px;
-        margin-top: 16px;
-        width: fit-content;
-        border-radius: 4px;
-        font-weight: 400;
-    }
-
-    @include screen-md {
-        @include column(flex-start, center);
-        border-radius: 16px;
-        padding: 40px;
-
-        .exchange-difference {
-            margin-top: 32px;
-        }
     }
 }
 

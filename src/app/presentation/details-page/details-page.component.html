@@ -1,15 +1,23 @@
 <div class="details-page">
   <div class="currency-form">
-    <app-detailed-currency-form></app-detailed-currency-form>
+    <app-detailed-currency-form
+      [default-from-currency]="detailsPageData.baseCurrency"
+      [default-to-currency]="detailsPageData.toCurrency"
+      [title]="baseCurrencyName + ' Details'" [formGroup]="exchangeForm"
+      [currencies]="currenciesNames"
+      [enabled]="detailsPageData.enabled"
+      (onSubmit)="onSubmit()"
+      (onChange)="onFormChange()"
+    ></app-detailed-currency-form>
   </div>
   <div class="main-exchange-wrapper">
-    <div class="main-exchange">
-      <p class="exchange-value">
-        4000.45<span>USD</span>
-      </p>
-      <p class="exchange-name">United States Dollar</p>
-      <p class="exchange-difference">1.00 EUR = 1.34 USD</p>
-    </div>
+    <app-exchange-result
+      [main-exchange]="detailsPageData.mainExchange?.toAmountString ?? detailsPageData.baseExchange?.toAmountString ?? ''"
+      [base-exchange]="detailsPageData.baseExchange?.toAmountString ?? ''"
+      [to-currency-short]="detailsPageData.toCurrency"
+      [to-currency-full]="toCurrencyName"
+      [base-currency-short]="detailsPageData.baseCurrency"
+    ></app-exchange-result>
   </div>
   <div class="chart-container">
     <app-chart/>

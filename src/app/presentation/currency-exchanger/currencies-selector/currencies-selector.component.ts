@@ -10,6 +10,8 @@ export class CurrenciesSelectorComponent {
     @Input("direction") direction: "uni" | "bi" = "bi";
     @Input("formGroup") formGroup!: FormGroup;
     @Input() currencies: Array<string> = [];
+    @Input("default-from-currency") defaultFromCurrency: string = "EUR";
+    @Input("default-to-currency") defaultToCurrency: string = "USD";
 
     switchCurrencies() {
         if (this.direction === "uni") return;

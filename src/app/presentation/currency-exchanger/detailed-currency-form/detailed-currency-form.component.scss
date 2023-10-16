@@ -2,7 +2,8 @@
 
 .header {
     @include text("title1");
-    @include row(space-between);
+    @include row();
+    gap: 16px;
     font-family: "Montserrat", sans-serif;
     padding-block: 8px;
     margin-inline-end: -8px;

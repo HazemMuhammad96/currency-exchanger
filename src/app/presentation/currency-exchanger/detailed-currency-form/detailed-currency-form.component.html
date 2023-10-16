@@ -1,16 +1,21 @@
-<form class="details-currency-form">
+<form [formGroup]="exchangeForm" (ngSubmit)="onSubmit()" class="details-currency-form">
   <header class="header">
-    <h1>EURO Details</h1>
-    <app-icon-button color="none" label="back">
-      <span class="material-symbols-outlined">close</span>
-    </app-icon-button>
+    <a routerLink="../..">
+      <app-icon-button color="none" label="back">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </app-icon-button>
+    </a>
+    <h1>{{title}}</h1>
   </header>
   <input class="currency-input" type="number" min="1"
          placeholder="Enter amount"
          pattern="[0-9]"
-         name="currency">
-  <fieldset class="actions-container" [disabled]="'disabled'">
-    <app-currencies-selector direction="uni"></app-currencies-selector>
+         formControlName="amount">
+  <fieldset class="actions-container" [disabled]="!enabled? 'disabled': undefined">
+    <app-currencies-selector [currencies]="currencies" [formGroup]="exchangeForm"
+                             [default-from-currency]="defaultFromCurrency"
+                              [default-to-currency]="defaultToCurrency"
+                             direction="uni"></app-currencies-selector>
     <app-icon-button color="primary" label="Convert" label-placement="hidden" type="submit">
       <span class="icon material-symbols-outlined">done</span>
     </app-icon-button>

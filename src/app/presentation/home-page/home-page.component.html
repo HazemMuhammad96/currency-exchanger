@@ -5,17 +5,13 @@
                        (onSubmit)="onSubmit()"></app-currency-form>
   </div>
   <div class="main-exchange-wrapper">
-    <div class="main-exchange">
-      <p class="exchange-value">
-        {{homePageData.mainExchange?.toAmountString ?? homePageData.baseExchange?.toAmountString}}
-        <span>{{homePageData.toCurrency}}</span>
-      </p>
-      <p class="exchange-name">{{toCurrencyName}}</p>
-      <p class="exchange-difference">
-        1.00 {{homePageData.baseCurrency}}
-        = {{homePageData.baseExchange?.toAmountString ?? ''}} {{homePageData.toCurrency}}
-      </p>
-    </div>
+    <app-exchange-result
+      [main-exchange]="homePageData.mainExchange?.toAmountString ?? homePageData.baseExchange?.toAmountString ?? ''"
+      [base-exchange]="homePageData.baseExchange?.toAmountString ?? ''"
+      [to-currency-short]="homePageData.toCurrency"
+      [to-currency-full]="toCurrencyName"
+      [base-currency-short]="homePageData.baseCurrency"
+    ></app-exchange-result>
   </div>
   <ul class="frequent-exchanges-list">
     <li *ngFor="let currency of homePageData.frequentCurrencies; index as i">

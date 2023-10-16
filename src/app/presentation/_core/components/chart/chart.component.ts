@@ -81,7 +81,6 @@ export class ChartComponent implements AfterViewInit {
     }
 
     calculateLine(x: number, y: number) {
-        console.log({ this: this.paneHeight });
         const adjacent = this.paneWidth;
         const opposite = (this.paneHeight * Math.abs(y - x)) / 100;
         const hypotenuse = Math.sqrt(adjacent ** 2 + opposite ** 2);
@@ -138,10 +137,6 @@ export class ChartComponent implements AfterViewInit {
         }));
     }
 
-    constructor() {
-        console.log({ yRange: this.yRange });
-        console.log({ points: this.points });
-    }
 
     @ViewChild("chartItem")
     chartGridItem: ElementRef = {} as ElementRef;

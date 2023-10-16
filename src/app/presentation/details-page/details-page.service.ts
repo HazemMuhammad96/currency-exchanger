@@ -6,6 +6,7 @@ import {
 import Exchange from "../../domain/models/exchange";
 import Currency from "../../domain/models/currency";
 import CurrencyRepository from "../../data/currency-repository";
+import { ActivatedRoute } from "@angular/router";
 
 export interface DetailsPageData extends CommonExchangePageData {}
 

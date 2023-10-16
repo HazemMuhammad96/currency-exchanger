@@ -2,7 +2,7 @@
   <select formControlName="from" [disabled]="direction==='uni'">
     <option *ngFor="let currency of currencies"
             [value]="currency"
-            [defaultSelected]="currency === 'EUR'"
+            [defaultSelected]="currency === defaultFromCurrency"
     >
       {{currency}}
     </option>
@@ -13,7 +13,7 @@
   <select formControlName="to">
     <option *ngFor="let currency of currencies"
             [value]="currency"
-            [defaultSelected]="currency === 'USD'"
+            [defaultSelected]="currency === defaultToCurrency"
     >
       {{currency}}
     </option>
