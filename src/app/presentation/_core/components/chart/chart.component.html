@@ -8,7 +8,8 @@
   >
     <div #chartItem class="x-item" *ngFor="let item of points; index as i">
 
-      <div class="y-item-label" *ngFor="let rangeItem of yRangeLabels" [attr.aria-hidden]="i!==0" [style]="rangeItem.style">
+      <div class="y-item-label" *ngFor="let rangeItem of yRangeLabels" [attr.aria-hidden]="i!==0"
+           [style]="rangeItem.style">
         {{rangeItem.label}}
       </div>
 
@@ -16,14 +17,11 @@
         <span>{{item.label}}</span>
       </p>
 
-      <div class="connecting-line"
-           aria-expanded="true"
-           [style]="item.line['hypotenuse']"
+      <div *ngFor="let expanded of [true, false]" class="connecting-line"
+           [attr.aria-expanded]="expanded"
+           [style]="i > 0 ? item.line['hypotenuse']: undefined"
       ></div>
-      <div class="connecting-line"
-           aria-expanded="false"
-           [style]="item.line['hypotenuse']"
-      ></div>
+
       <div class="dot" [style]="'bottom: ' + item.percentage + '%;'"></div>
     </div>
   </div>

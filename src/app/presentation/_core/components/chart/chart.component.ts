@@ -70,11 +70,11 @@ export class ChartComponent implements AfterViewInit {
 
     get yRangeLabels() {
         const max = this.yRange.at(-1) ?? 0;
-        return this.yRange.map((it) => {
+        return this.yRange.splice(0, this.yRange.length - 1).map((it, i) => {
             return {
                 label: it.toString(),
                 style: {
-                    bottom: `${Number(((it / max) * 100).toFixed(4))}%`,
+                    bottom: `${Number(((i / max) * 100).toFixed(4))}%`,
                 },
             };
         });
@@ -87,17 +87,6 @@ export class ChartComponent implements AfterViewInit {
         const _theta = Math.atan(opposite / adjacent) * (180 / Math.PI);
         const theta = y - x > 0 ? -1 * _theta : _theta;
         return {
-            adjacent: {
-                left: "0",
-                width: `${adjacent}px`,
-                bottom: `${x}%`,
-            },
-            opposite: {
-                right: "-2.5px",
-                bottom: `${x}%`,
-                background: "red",
-                height: `${opposite}px`,
-            },
             hypotenuse: {
                 left: "0",
                 width: `${hypotenuse}px`,
@@ -118,11 +107,6 @@ export class ChartComponent implements AfterViewInit {
         return this.values.map((it, i) => ({
             ...it,
             percentage: Number(((it.value / maxNumber) * 100).toFixed(4)),
-            // diff: Math.abs(
-            //     Number(
-            //         ((this.values[i - 1]?.value / maxNumber) * 100).toFixed(4)
-            //     ) - Number(((it.value / maxNumber) * 100).toFixed(4))
-            // ),
             line: this.calculateLine(
                 this.values[i - 1]?.value
                     ? Number(
@@ -136,7 +120,6 @@ export class ChartComponent implements AfterViewInit {
             ),
         }));
     }
-
 
     @ViewChild("chartItem")
     chartGridItem: ElementRef = {} as ElementRef;
