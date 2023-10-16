@@ -1,10 +1,10 @@
-<form class="currency-form">
+<form [formGroup]="exchangeForm" (ngSubmit)="onSubmit()" class="currency-form">
   <input class="currency-input" type="number" min="1"
          placeholder="Enter amount"
          pattern="[0-9]"
-         name="currency">
-  <fieldset [disabled]="'disabled'">
-    <app-currencies-selector></app-currencies-selector>
+         formControlName="amount">
+  <fieldset [disabled]="!enabled? 'disabled': undefined">
+    <app-currencies-selector [currencies]="currencies" [formGroup]="exchangeForm"></app-currencies-selector>
     <div class="actions-container">
       <app-icon-button label="Clear" label-placement="overlay" type="reset">
         <span class="icon material-symbols-outlined">clear_all</span>

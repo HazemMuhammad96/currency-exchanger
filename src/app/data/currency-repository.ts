@@ -1,7 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { map, Observable } from "rxjs";
-
+import {Injectable} from "@angular/core";
+@Injectable({
+  providedIn: "root",
+})
 export default class CurrencyRepository {
     params = new HttpParams();
 
@@ -14,7 +17,6 @@ export default class CurrencyRepository {
         rates: Map<string, number>;
         base: string;
     }> {
-        console.log({ params: this.params.get("access_key") });
         return this.httpClient
             .get(environment.apiUrl + "/latest", {
                 params: this.params,

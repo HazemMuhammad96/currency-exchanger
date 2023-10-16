@@ -1,25 +1,33 @@
 <div class="home-page">
   <div class="currency-form">
-    <app-currency-form></app-currency-form>
+    <app-currency-form [currencies]="currenciesNames" [enabled]="homePageData.enabled"
+                       (onChange)="onFormChange()" [formGroup]="exchangeForm"
+                       (onSubmit)="onSubmit()"></app-currency-form>
   </div>
   <div class="main-exchange-wrapper">
     <div class="main-exchange">
       <p class="exchange-value">
-        4000.45<span>USD</span>
+        {{homePageData.mainExchange?.toAmountString ?? homePageData.baseExchange?.toAmountString}}
+        <span>{{homePageData.toCurrency}}</span>
       </p>
-      <p class="exchange-name">United States Dollar</p>
-      <p class="exchange-difference">1.00 EUR = 1.34 USD</p>
+      <p class="exchange-name">{{toCurrencyName}}</p>
+      <p class="exchange-difference">
+        1.00 {{homePageData.baseCurrency}}
+        = {{homePageData.baseExchange?.toAmountString ?? ''}} {{homePageData.toCurrency}}
+      </p>
     </div>
   </div>
   <ul class="frequent-exchanges-list">
-    <li *ngFor="let currency of frequentCurrencies">
+    <li *ngFor="let currency of homePageData.frequentCurrencies; index as i">
       <p class="exchange-currencies">
-        USD/JPY
+        {{homePageData.baseCurrency}}/{{currency.shortName}}
       </p>
       <p class="exchange-value">
-        4334.45<span>JPY</span>
+        {{
+        homePageData.frequentExchanges[i]?.toAmountString ?? ""
+        }}<span>{{currency.shortName}}</span>
       </p>
-      <p class="exchange-difference">1.00 JPY = 1.34 USD</p>
+      <p class="exchange-difference">{{currency.fullName}}</p>
     </li>
   </ul>
 </div>

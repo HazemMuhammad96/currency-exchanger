@@ -1,11 +1,21 @@
-<div class="currencies-selector">
-  <select [disabled]="direction==='uni'">
-    <option value="USD">USD</option>
+<div class="currencies-selector" [formGroup]="formGroup">
+  <select formControlName="from" [disabled]="direction==='uni'">
+    <option *ngFor="let currency of currencies"
+            [value]="currency"
+            [defaultSelected]="currency === 'EUR'"
+    >
+      {{currency}}
+    </option>
   </select>
   <button type='button'>
     <span class="material-symbols-outlined">{{direction === "bi" ? "swap_horiz" : "trending_flat"}}</span>
   </button>
-  <select>
-    <option value="USD">USD</option>
+  <select formControlName="to">
+    <option *ngFor="let currency of currencies"
+            [value]="currency"
+            [defaultSelected]="currency === 'USD'"
+    >
+      {{currency}}
+    </option>
   </select>
 </div>

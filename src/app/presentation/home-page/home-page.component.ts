@@ -1,33 +1,52 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import CurrencyRepository from "../../data/currency-repository";
-import exchangeRateUseCase from "../../domain/exchange-rate-usecase";
-import ExchangePopularCurrenciesUseCase from "../../domain/exchange-popular-currencies-usecase";
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { HomePageData, HomePageService } from "./home-page.service";
 
 @Component({
     selector: "app-home-page",
     templateUrl: "./home-page.component.html",
     styleUrls: ["./home-page.component.scss"],
+    providers: [HomePageService],
 })
 export class HomePageComponent {
-    frequentCurrencies = Array.from(
-        { length: 9 },
-        (_: any, i: number) => i + 1
-    );
+    exchangeForm: FormGroup;
+    homePageData: HomePageData;
 
-    constructor(httpClient: HttpClient) {
-        const currencyRepository = new CurrencyRepository(httpClient);
-        currencyRepository.getCurrencies().subscribe((data) => {
-            console.log(data);
+    constructor(
+        private formBuilder: FormBuilder,
+        private homePageService: HomePageService
+    ) {
+        this.homePageData = this.homePageService.homePageData.value;
+        this.exchangeForm = this.formBuilder.group({
+            amount: undefined,
+            from: "EUR",
+            to: "USD",
         });
-        ExchangePopularCurrenciesUseCase(
-            currencyRepository,
-            1,
-            "EUR",
-        ).then((value) => {
-            console.log({ value });
+        this.homePageService.homePageData.subscribe((data) => {
+            this.homePageData = data;
         });
     }
 
-    // ngOnInit(): void {}
+    get currenciesNames(): Array<string> {
+        return this.homePageService.currenciesNames;
+    }
+
+    get toCurrencyName(): string {
+        return (
+            this.homePageData.currencies.get(this.homePageData.toCurrency)
+                ?.fullName ?? ""
+        );
+    }
+
+    onFormChange() {
+        this.homePageService.listenToChange(
+            this.exchangeForm.value.amount,
+            this.exchangeForm.value.from,
+            this.exchangeForm.value.to
+        );
+    }
+
+    onSubmit() {
+        this.homePageService.exchange(this.exchangeForm.value.amount);
+    }
 }
