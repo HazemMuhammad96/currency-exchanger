@@ -4,7 +4,7 @@
     Y-Axis: Monthly Rate
   </p>
   <div class="chart"
-       [style]="'grid-template-columns: repeat(' + (data.size + 1) + ', 1fr);'"
+       [style]="'grid-template-columns: repeat(' + (data.length + 1) + ', 1fr);'"
   >
     <div #chartItem class="x-item" *ngFor="let item of points; index as i">
 

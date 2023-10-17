@@ -3,33 +3,29 @@ import {
     Component,
     ElementRef,
     HostListener,
+    Input,
+    OnChanges,
+    SimpleChanges,
     ViewChild,
 } from "@angular/core";
 
-type NodeDescription = { label: string; value: number };
-type ChartData = Map<string, NodeDescription> | Map<number, NodeDescription>;
+export type NodeDescription = { label: string; value: number };
+export type ChartData = Array<NodeDescription>;
 
 @Component({
     selector: "app-chart",
     templateUrl: "./chart.component.html",
     styleUrls: ["./chart.component.scss"],
 })
-export class ChartComponent implements AfterViewInit {
+export class ChartComponent implements AfterViewInit, OnChanges {
     breakpoints = 5;
     maxInterval: number = 0;
     paneWidth: number = 0;
     paneHeight: number = 0;
-    data: ChartData = new Map<number, NodeDescription>([
-        [1, { label: "January", value: 6 }],
-        [2, { label: "February", value: 3 }],
-        [3, { label: "March", value: 3 }],
-        [4, { label: "April", value: 4 }],
-        [5, { label: "June", value: 5 }],
-        [6, { label: "July", value: 6 }],
-    ]);
+    @Input("chart-data") data: ChartData = [];
 
     get values(): NodeDescription[] {
-        return Array.from(this.data.values());
+        return this.data;
     }
 
     get intervalDetails(): {
@@ -124,14 +120,22 @@ export class ChartComponent implements AfterViewInit {
     @ViewChild("chartItem")
     chartGridItem: ElementRef = {} as ElementRef;
 
-    ngAfterViewInit() {
+    recalculateLine() {
         this.paneWidth = this.chartGridItem.nativeElement.offsetWidth;
         this.paneHeight = this.chartGridItem.nativeElement.offsetHeight;
     }
 
+    ngAfterViewInit() {
+        this.recalculateLine();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log({ changes });
+        this.recalculateLine();
+    }
+
     @HostListener("window:resize")
     onResize() {
-        this.paneWidth = this.chartGridItem.nativeElement.offsetWidth;
-        this.paneHeight = this.chartGridItem.nativeElement.offsetHeight;
+        this.recalculateLine();
     }
 }
