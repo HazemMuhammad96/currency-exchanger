@@ -20,6 +20,8 @@
     ></app-exchange-result>
   </div>
   <div class="chart-container">
-    <app-chart [chart-data]="detailsPageData.annualRates"/>
+    <ng-template [ngIf]="detailsPageData.annualRates.length > 0">
+      <app-chart [chart-data]="detailsPageData.annualRates"></app-chart>
+    </ng-template>
   </div>
 </div>

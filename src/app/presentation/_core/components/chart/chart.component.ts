@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -8,6 +9,7 @@ import {
     SimpleChanges,
     ViewChild,
 } from "@angular/core";
+import { min } from "rxjs";
 
 export type NodeDescription = { label: string; value: number };
 export type ChartData = Array<NodeDescription>;
@@ -23,6 +25,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     paneWidth: number = 0;
     paneHeight: number = 0;
     @Input("chart-data") data: ChartData = [];
+
+    constructor(private changeDetector: ChangeDetectorRef) {}
 
     get values(): NodeDescription[] {
         return this.data;
@@ -52,6 +56,10 @@ export class ChartComponent implements AfterViewInit, OnChanges {
 
     get yRange(): number[] {
         const { minInterval, intervalLength } = this.intervalDetails;
+        console.log({
+            minInterval,
+            intervalLength,
+        });
         const chartNumbers: number[] = [];
         let currentInterval = minInterval;
         for (let i = 0; i <= this.breakpoints + 2; i++) {
@@ -64,13 +72,20 @@ export class ChartComponent implements AfterViewInit, OnChanges {
         return chartNumbers;
     }
 
-    get yRangeLabels() {
+    calculatePercentage(value: number) {
         const max = this.yRange.at(-1) ?? 0;
+        const min = this.yRange[0];
+        return ((value - min) / (max - min)) * 100;
+    }
+
+    get yRangeLabels() {
         return this.yRange.splice(0, this.yRange.length - 1).map((it, i) => {
             return {
-                label: it.toString(),
+                label: it.toFixed(3),
                 style: {
-                    bottom: `${Number(((i / max) * 100).toFixed(4))}%`,
+                    bottom: `${Number(
+                        this.calculatePercentage(it).toFixed(4)
+                    )}%`,
                 },
             };
         });
@@ -99,20 +114,18 @@ export class ChartComponent implements AfterViewInit, OnChanges {
         value: number;
         percentage: number;
     }[] {
-        const maxNumber: number = this.yRange.at(-1) ?? 0;
         return this.values.map((it, i) => ({
             ...it,
-            percentage: Number(((it.value / maxNumber) * 100).toFixed(4)),
+            percentage: Number(this.calculatePercentage(it.value).toFixed(4)),
             line: this.calculateLine(
                 this.values[i - 1]?.value
                     ? Number(
-                          (
-                              (this.values[i - 1]?.value / maxNumber) *
-                              100
+                          this.calculatePercentage(
+                              this.values[i - 1]?.value
                           ).toFixed(4)
                       )
                     : 0,
-                Number(((it.value / maxNumber) * 100).toFixed(4))
+                Number(this.calculatePercentage(it.value).toFixed(4))
             ),
         }));
     }
@@ -130,7 +143,6 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log({ changes });
         this.recalculateLine();
     }
 

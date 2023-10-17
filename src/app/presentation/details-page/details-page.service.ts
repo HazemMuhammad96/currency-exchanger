@@ -7,9 +7,7 @@ import Exchange from "../../domain/models/exchange";
 import Currency from "../../domain/models/currency";
 import CurrencyRepository from "../../data/currency-repository";
 import GetAnnualRateUseCase from "../../domain/usecases/get-annual-rate-usecase";
-import {
-    ChartData,
-} from "../_core/components/chart/chart.component";
+import { ChartData } from "../_core/components/chart/chart.component";
 
 export interface DetailsPageData extends CommonExchangePageData {
     annualRates: ChartData;
@@ -26,8 +24,8 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
             {
                 enabled: false,
                 currencies: new Map<string, Currency>(),
-                baseCurrency: "EUR",
-                toCurrency: "USD",
+                baseCurrency: "",
+                toCurrency: "",
                 mainExchange: undefined,
                 annualRates: [],
             },
@@ -41,15 +39,25 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
     }
 
     private async fetchAnnualRates() {
+        if (
+            !this.pageData.value.baseCurrency ||
+            !this.pageData.value.toCurrency
+        )
+            return;
         const annualRates: ChartData = await this.getAnnualRateUseCase.execute(
             this.pageData.value.baseCurrency,
             this.pageData.value.toCurrency
         );
-
         this.pageData.next({
             ...this.pageData.value,
             annualRates,
         });
+        setTimeout(() => {
+            this.pageData.next({
+                ...this.pageData.value,
+                annualRates,
+            });
+        }, 1);
     }
 
     public listenToChange(amount: number, from: string, to: string) {
@@ -64,6 +72,7 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
         if (prevTo !== to) {
             this.convertBase();
             this.exchange(amount);
+            this.fetchAnnualRates();
         }
     }
 

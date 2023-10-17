@@ -65,6 +65,7 @@ export default class GetAnnualRateUseCase {
             value: number;
         }>
     > {
+
         const lastDaysOfMonths = this.getLastDaysOfTheYear();
         console.log({ lastDaysOfMonths });
         const annualRates = await Promise.all(
