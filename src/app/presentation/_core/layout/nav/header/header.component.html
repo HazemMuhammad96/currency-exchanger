@@ -6,7 +6,8 @@
   <nav [attr.aria-expanded]="isMenuOpen" class="nav" [class.open]="isMenuOpen">
     <ul>
       <li *ngFor="let route of routes">
-        <a [routerLink]="[route.path]" routerLinkActive="active-link">{{route.label}}</a>
+        <a (click)="isMenuOpen = !isMenuOpen" [routerLink]="[route.path]"
+           routerLinkActive="active-link">{{route.label}}</a>
       </li>
     </ul>
   </nav>

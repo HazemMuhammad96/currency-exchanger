@@ -81,6 +81,7 @@ export class HomePageService extends ExchangeService<HomePageData> {
             ...this.pageData.value,
             mainExchange,
             frequentExchanges,
+            loading: false,
         });
     }
 }

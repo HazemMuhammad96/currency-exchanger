@@ -1,13 +1,13 @@
 <div class="home-page">
-  <ng-template [ngIf]="homePageData.loading">
-    <app-loading></app-loading>
-  </ng-template>
   <div class="currency-form">
     <app-currency-form [currencies]="currenciesNames" [enabled]="homePageData.enabled"
                        (onChange)="onFormChange()" [formGroup]="exchangeForm"
                        (onSubmit)="onSubmit()"></app-currency-form>
   </div>
   <div class="main-exchange-wrapper">
+    <ng-template [ngIf]="homePageData.loading">
+      <app-loading></app-loading>
+    </ng-template>
     <app-exchange-result
       [main-exchange]="homePageData.mainExchange?.toAmountString ?? homePageData.baseExchange?.toAmountString ?? ''"
       [base-exchange]="homePageData.baseExchange?.toAmountString ?? ''"

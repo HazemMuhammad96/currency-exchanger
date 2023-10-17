@@ -71,6 +71,13 @@
     }
 }
 
+.icon-button:disabled {
+    .icon {
+        filter: brightness(70%);
+        outline: 0 solid rgba(167, 192, 251, 0.35);
+    }
+}
+
 @keyframes icon-active {
     0% {
         outline: 1px solid transparent;

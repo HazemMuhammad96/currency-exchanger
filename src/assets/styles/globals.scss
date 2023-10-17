@@ -3,6 +3,7 @@
 
 .material-symbols-outlined {
     @include centered;
+  max-width: 32px;
     font-variation-settings:
         "FILL" 0,
         "wght" 100,

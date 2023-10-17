@@ -5,7 +5,6 @@ import {
     HostListener,
     Input,
     OnChanges,
-    SimpleChanges,
     ViewChild,
 } from "@angular/core";
 
@@ -23,8 +22,11 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     paneWidth: number = 0;
     paneHeight: number = 0;
     @Input("chart-data") data: ChartData = [];
-yRangeLabels: { label: string; style: { bottom: string; }; }[] = [];
-    constructor( ) {}
+    yRangeLabels: { label: string; style: { bottom: string } }[] = [];
+
+    constructor() {
+        this.recalculate();
+    }
 
     get values(): NodeDescription[] {
         return this.data;
@@ -72,7 +74,7 @@ yRangeLabels: { label: string; style: { bottom: string; }; }[] = [];
         return ((value - min) / (max - min)) * 100;
     }
 
-     calculateYRangeLabels() {
+    calculateYRangeLabels() {
         return this.yRange.splice(0, this.yRange.length - 1).map((it) => {
             return {
                 label: it.toFixed(3),
@@ -128,19 +130,20 @@ yRangeLabels: { label: string; style: { bottom: string; }; }[] = [];
     chartGridItem: ElementRef = {} as ElementRef;
 
     recalculateLines() {
+        if (!this.chartGridItem.nativeElement) return;
         this.paneWidth = this.chartGridItem.nativeElement.offsetWidth;
         this.paneHeight = this.chartGridItem.nativeElement.offsetHeight;
     }
 
     recalculate() {
-      this.calculateYRangeLabels();
+        this.yRangeLabels = this.calculateYRangeLabels();
     }
 
     ngAfterViewInit() {
         this.recalculateLines();
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges() {
         this.recalculateLines();
         this.recalculate();
     }
