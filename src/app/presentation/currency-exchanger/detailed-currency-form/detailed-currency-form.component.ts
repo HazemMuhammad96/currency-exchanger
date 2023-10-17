@@ -14,7 +14,8 @@ export class DetailedCurrencyFormComponent implements OnInit {
     @Input() currencies: Array<string> = [];
     @Output("onSubmit") onSubmitEvent = new EventEmitter<void>();
     @Output("onChange") onChangeEvent = new EventEmitter<void>();
-@Input() title: string = "";
+    @Input() title: string = "";
+
     ngOnInit(): void {
         this.exchangeForm.valueChanges.subscribe(() => {
             this.onChangeEvent.emit();

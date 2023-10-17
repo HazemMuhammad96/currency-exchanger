@@ -17,6 +17,7 @@ import { DetailedCurrencyFormComponent } from "./presentation/currency-exchanger
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ExchangeResultComponent } from './presentation/currency-exchanger/exchange-result/exchange-result.component';
+import { LoadingComponent } from './presentation/_core/components/loading/loading.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { ExchangeResultComponent } from './presentation/currency-exchanger/excha
         CurrenciesSelectorComponent,
         DetailedCurrencyFormComponent,
         ExchangeResultComponent,
+        LoadingComponent,
     ],
     imports: [
         BrowserModule,

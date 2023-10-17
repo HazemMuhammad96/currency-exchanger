@@ -11,6 +11,7 @@ import { ChartData } from "../_core/components/chart/chart.component";
 
 export interface DetailsPageData extends CommonExchangePageData {
     annualRates: ChartData;
+    annualRatesLoading: boolean;
 }
 
 @Injectable({
@@ -28,6 +29,8 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
                 toCurrency: "",
                 mainExchange: undefined,
                 annualRates: [],
+                loading: false,
+                annualRatesLoading: false,
             },
             currencyRepository
         );
@@ -44,12 +47,17 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
             !this.pageData.value.toCurrency
         )
             return;
+        this.pageData.next({
+            ...this.pageData.value,
+            annualRatesLoading: true,
+        });
         const annualRates: ChartData = await this.getAnnualRateUseCase.execute(
             this.pageData.value.baseCurrency,
             this.pageData.value.toCurrency
         );
         this.pageData.next({
             ...this.pageData.value,
+            annualRatesLoading: false,
             annualRates,
         });
         setTimeout(() => {
@@ -70,9 +78,10 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
         });
 
         if (prevTo !== to) {
-            this.convertBase();
-            this.exchange(amount);
-            this.fetchAnnualRates();
+            this.fetchAnnualRates().then(() => {
+                this.exchange(amount);
+                this.convertBase();
+            });
         }
     }
 
@@ -82,6 +91,7 @@ export class DetailsPageService extends ExchangeService<DetailsPageData> {
         this.pageData.next({
             ...this.pageData.value,
             mainExchange,
+            loading: false,
         });
     }
 }

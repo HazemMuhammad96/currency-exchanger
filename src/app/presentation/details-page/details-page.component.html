@@ -20,7 +20,10 @@
     ></app-exchange-result>
   </div>
   <div class="chart-container">
-    <ng-template [ngIf]="detailsPageData.annualRates.length > 0">
+    <ng-template [ngIf]="detailsPageData.loading || detailsPageData.annualRatesLoading">
+      <app-loading></app-loading>
+    </ng-template>
+    <ng-template [ngIf]="detailsPageData.annualRates.length > 0 && !detailsPageData.annualRatesLoading">
       <app-chart [chart-data]="detailsPageData.annualRates"></app-chart>
     </ng-template>
   </div>

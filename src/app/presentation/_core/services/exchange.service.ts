@@ -12,6 +12,7 @@ export interface CommonExchangePageData {
     toCurrency: string;
     mainExchange?: Exchange;
     baseExchange?: Exchange;
+    loading: boolean;
 }
 
 export class ExchangeService<T extends CommonExchangePageData> {
@@ -32,6 +33,13 @@ export class ExchangeService<T extends CommonExchangePageData> {
         this.convertBase();
     }
 
+    protected injectLoading() {
+        this.pageData.next({
+            ...this.pageData.value,
+            loading: true,
+        });
+    }
+
     get currenciesNames(): Array<string> {
         return Array.from(this.pageData.value.currencies.keys());
     }
@@ -47,6 +55,7 @@ export class ExchangeService<T extends CommonExchangePageData> {
     }
 
     protected convert(amount: number, to: string) {
+        this.injectLoading();
         const from = this.pageData.value.baseCurrency;
         return this.exchangeUseCase.execute(amount, from, to);
     }
@@ -59,6 +68,7 @@ export class ExchangeService<T extends CommonExchangePageData> {
         this.pageData.next({
             ...this.pageData.value,
             baseExchange,
+            loading: false,
         });
     }
 }

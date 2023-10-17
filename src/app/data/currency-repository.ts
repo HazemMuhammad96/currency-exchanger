@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { map, Observable } from "rxjs";
+import { map } from "rxjs";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -10,7 +10,6 @@ export default class CurrencyRepository {
     params = new HttpParams();
 
     constructor(private httpClient: HttpClient) {
-        console.log({ apiKey: environment.apiKey });
         this.params = this.params.append("access_key", environment.apiKey);
     }
 

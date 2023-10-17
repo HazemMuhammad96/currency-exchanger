@@ -26,14 +26,13 @@ export class HomePageService extends ExchangeService<HomePageData> {
                 toCurrency: "USD",
                 mainExchange: undefined,
                 frequentExchanges: [],
+                loading: false,
             },
             currencyRepository
         );
 
         this.convertBasePopular();
     }
-
-
 
     public listenToChange(amount: number, from: string, to: string) {
         const prevFrom = this.pageData.value.baseCurrency;
@@ -62,6 +61,8 @@ export class HomePageService extends ExchangeService<HomePageData> {
     }
 
     private async convertPopular(amount: number) {
+        this.injectLoading();
+
         const frequentExchangesPromise =
             this.pageData.value.frequentCurrencies.map(
                 async (currency: Currency) => {

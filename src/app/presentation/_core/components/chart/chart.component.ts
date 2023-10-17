@@ -1,6 +1,5 @@
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -9,7 +8,6 @@ import {
     SimpleChanges,
     ViewChild,
 } from "@angular/core";
-import { min } from "rxjs";
 
 export type NodeDescription = { label: string; value: number };
 export type ChartData = Array<NodeDescription>;
@@ -25,8 +23,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     paneWidth: number = 0;
     paneHeight: number = 0;
     @Input("chart-data") data: ChartData = [];
-
-    constructor(private changeDetector: ChangeDetectorRef) {}
+yRangeLabels: { label: string; style: { bottom: string; }; }[] = [];
+    constructor( ) {}
 
     get values(): NodeDescription[] {
         return this.data;
@@ -56,10 +54,6 @@ export class ChartComponent implements AfterViewInit, OnChanges {
 
     get yRange(): number[] {
         const { minInterval, intervalLength } = this.intervalDetails;
-        console.log({
-            minInterval,
-            intervalLength,
-        });
         const chartNumbers: number[] = [];
         let currentInterval = minInterval;
         for (let i = 0; i <= this.breakpoints + 2; i++) {
@@ -78,8 +72,8 @@ export class ChartComponent implements AfterViewInit, OnChanges {
         return ((value - min) / (max - min)) * 100;
     }
 
-    get yRangeLabels() {
-        return this.yRange.splice(0, this.yRange.length - 1).map((it, i) => {
+     calculateYRangeLabels() {
+        return this.yRange.splice(0, this.yRange.length - 1).map((it) => {
             return {
                 label: it.toFixed(3),
                 style: {
@@ -133,21 +127,26 @@ export class ChartComponent implements AfterViewInit, OnChanges {
     @ViewChild("chartItem")
     chartGridItem: ElementRef = {} as ElementRef;
 
-    recalculateLine() {
+    recalculateLines() {
         this.paneWidth = this.chartGridItem.nativeElement.offsetWidth;
         this.paneHeight = this.chartGridItem.nativeElement.offsetHeight;
     }
 
+    recalculate() {
+      this.calculateYRangeLabels();
+    }
+
     ngAfterViewInit() {
-        this.recalculateLine();
+        this.recalculateLines();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        this.recalculateLine();
+        this.recalculateLines();
+        this.recalculate();
     }
 
     @HostListener("window:resize")
     onResize() {
-        this.recalculateLine();
+        this.recalculateLines();
     }
 }

@@ -65,9 +65,7 @@ export default class GetAnnualRateUseCase {
             value: number;
         }>
     > {
-
         const lastDaysOfMonths = this.getLastDaysOfTheYear();
-        console.log({ lastDaysOfMonths });
         const annualRates = await Promise.all(
             lastDaysOfMonths.map((date, i) =>
                 i === lastDaysOfMonths.length - 1
@@ -75,14 +73,9 @@ export default class GetAnnualRateUseCase {
                     : this.currencyRepository.getHistoricalCurrencies(date)
             )
         );
-        const annualRatesMap: Array<{
-            label: string;
-            value: number;
-        }> = annualRates.map((rate) => ({
-            label: this.getMonthName(rate.date),
-            value: this.convert(rate.rates, from, to),
-        }));
-
-        return annualRatesMap;
+      return annualRates.map((rate) => ({
+          label: this.getMonthName(rate.date),
+          value: this.convert(rate.rates, from, to),
+      }));
     }
 }

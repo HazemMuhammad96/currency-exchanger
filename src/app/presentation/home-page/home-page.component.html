@@ -1,4 +1,7 @@
 <div class="home-page">
+  <ng-template [ngIf]="homePageData.loading">
+    <app-loading></app-loading>
+  </ng-template>
   <div class="currency-form">
     <app-currency-form [currencies]="currenciesNames" [enabled]="homePageData.enabled"
                        (onChange)="onFormChange()" [formGroup]="exchangeForm"
